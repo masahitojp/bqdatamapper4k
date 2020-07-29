@@ -13,6 +13,8 @@ TBD
 
 ### How to use
 
+*TableRow*
+
 ```kotlin
 data class Foo(val aaa:Long)
 

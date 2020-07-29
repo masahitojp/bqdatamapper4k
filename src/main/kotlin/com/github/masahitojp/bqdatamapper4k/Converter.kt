@@ -3,6 +3,9 @@ package com.github.masahitojp.bqdatamapper4k
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
+// use this code. Thanks Tom Hanley
+// https://stackoverflow.com/a/56347214
+
 val gson: Gson = Gson()
 
 //convert a data class to a map
