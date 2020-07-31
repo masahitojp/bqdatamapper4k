@@ -9,6 +9,9 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.3.72"
 }
 
+group = "com.github.masahitojp"
+version = "0.0.1"
+
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
