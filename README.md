@@ -1,6 +1,8 @@
 # bqdatamapper4k
 It's a glue code in BigQuery for Kotlin users.
 
+ <a href='https://bintray.com/masahitojp/maven/com.github.masahitojp.bqdatamapper4k/0.0.1/link'><img src='https://api.bintray.com/packages/masahitojp/maven/com.github.masahitojp.bqdatamapper4k/images/download.svg?version=0.0.1'></a>
+
 ## Getting Started
 
 ### Prerequisites
@@ -9,11 +11,22 @@ Install OpenJDK v8 later
 
 ### Installing
 
-TBD
+for gradle users
+```
+repositories {
+    ...
+    // add
+    maven (url ="https://dl.bintray.com/masahitojp/maven")
+}
+
+dependencies {
+    implementation( "com.github.masahitojp:bqdatamapper4k:0.0.1")
+}
+```
 
 ### How to use
 
-*TableRow*
+*[TableRow](https://developers.google.com/resources/api-libraries/documentation/bigquery/v2/java/latest/com/google/api/services/bigquery/model/TableRow.html?is-external=true)*
 
 ```kotlin
 data class Foo(val aaa:Long)

@@ -66,12 +66,6 @@ artifacts {
     add("archives", dokkaJar)
 }
 
-tasks {
-    "test"(Test::class) {
-        useJUnitPlatform()
-    }
-}
-
 publishing {
     publications {
         create<MavenPublication>("maven") {
