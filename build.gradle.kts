@@ -3,14 +3,18 @@
  *
  * This generated file contains a sample Kotlin application project to get you started.
  */
+import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.3.72"
+    id("org.jetbrains.dokka") version "0.10.1"
+    `maven-publish`
 }
 
 group = "com.github.masahitojp"
 version = "0.0.1"
+val artifactID = "bqdatamapper4k"
 
 repositories {
     // Use jcenter for resolving dependencies.
@@ -32,4 +36,85 @@ dependencies {
 
     // Use the Kotlin JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+}
+
+// Configure existing Dokka task to output HTML to typical Javadoc directory
+val dokka by tasks.getting(DokkaTask::class) {
+    outputFormat = "html"
+    outputDirectory = "$buildDir/javadoc"
+}
+
+// Create dokka Jar task from dokka task output
+val dokkaJar by tasks.creating(Jar::class) {
+    group = JavaBasePlugin.DOCUMENTATION_GROUP
+    description = "Assembles Kotlin docs with Dokka"
+    archiveClassifier.set("javadoc")
+    // dependsOn(dokka) not needed; dependency automatically inferred by from(dokka)
+    from(dokka)
+}
+
+// Create sources Jar from main kotlin sources
+val sourcesJar by tasks.creating(Jar::class) {
+    group = JavaBasePlugin.DOCUMENTATION_GROUP
+    description = "Assembles sources JAR"
+    archiveClassifier.set("sources")
+    from(sourceSets["main"].allSource)
+}
+
+artifacts {
+    add("archives", sourcesJar)
+    add("archives", dokkaJar)
+}
+
+tasks {
+    "test"(Test::class) {
+        useJUnitPlatform()
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "com.github.masahitojp"
+            from(components.findByName("kotlin"))
+            artifact(sourcesJar)
+            artifact(dokkaJar)
+            pom {
+                name.set("bqdatamapper4k")
+                description.set("BigQuery datamapper in Kotlin")
+                url.set("https://github.com/masahitojp/bqdatamapper4k")
+                licenses {
+                    license {
+                        name.set("Apache License, Version 2.0")
+                        url.set("https://opensource.org/licenses/Apache-2.0")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("masahitojp")
+                        name.set("Masato Nakamura")
+                        email.set("randomstep@gmail.com")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git@github.com:masahitojp/bqdatamapper4k.git")
+                    developerConnection.set("scm:git:ssh://github.com:masahitojp/bqdatamapper4k.git")
+                    url.set("https://github.com/masahitojp/bqdatamapper4k")
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = "bintray"
+            val bintrayUsername = "masahitojp"
+            val bintrayRepoName = "maven"
+            val bintrayPackageName = "com.github.masahitojp.bqdatamapper4k"
+            setUrl("https://api.bintray.com/content/$bintrayUsername/$bintrayRepoName/$bintrayPackageName/${project.version};publish=0;override=1")
+            credentials {
+                username = project.findProperty("bintray_user") as String?
+                password = project.findProperty("bintray_api_key") as String?
+            }
+        }
+    }
 }
