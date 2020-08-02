@@ -13,12 +13,6 @@ Install OpenJDK v8 later
 
 for gradle users
 ```
-repositories {
-    ...
-    // add
-    maven (url ="https://dl.bintray.com/masahitojp/maven")
-}
-
 dependencies {
     implementation( "com.github.masahitojp:bqdatamapper4k:0.0.1")
 }
