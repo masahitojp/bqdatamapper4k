@@ -9,19 +9,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
-data class Foo(val aaa: Long)
-data class Bar(
-    val a: Long,
-    val b: String?,
-    val c: Int?
-)
-
-data class Baz(
-    val a: Long,
-    val b: String? = "",
-    val c: Int? = -1
-)
-
 class AppTest {
     @Test
     fun testFoo() {
@@ -45,4 +32,12 @@ class AppTest {
         assertEquals(results, Baz(2, null, null))
     }
 
+    @Test
+    fun testDataclassWithListParams() {
+        val row = TableRow()
+            .set("a", 2)
+            .set("b", listOf(1, 2))
+        val results = row.toDataClass<Hoge>()
+        assertEquals(results, Hoge(2, listOf<Int>(1, 2)))
+    }
 }
