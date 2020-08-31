@@ -4,7 +4,21 @@
 package com.github.masahitojp.bqdatamapper4k
 
 import com.google.api.services.bigquery.model.TableRow
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 inline fun <reified T> TableRow.toDataClass(): T {
     return this.toMap().toDataClass<T>()
+}
+
+inline fun toTableRow(json: String): TableRow {
+    val sourceDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    sourceDateFormat.timeZone = TimeZone.getTimeZone("UTC")
+
+    val outputRow = gson.fromJson(json, TableRow::class.java)
+    if (outputRow.containsKey("timestamp")) {
+        outputRow["timestamp"] = sourceDateFormat.format(Date())
+    }
+    return outputRow
 }

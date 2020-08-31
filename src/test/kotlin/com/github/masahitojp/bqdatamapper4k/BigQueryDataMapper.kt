@@ -40,4 +40,14 @@ class AppTest {
         val results = row.toDataClass<Hoge>()
         assertEquals(results, Hoge(2, listOf<Int>(1, 2)))
     }
+
+    @Test
+    fun toJson() {
+        val row = TableRow()
+            .set("a", 2.0)
+        val results = toTableRow("""
+            { "a" : 2 }
+        """.trimIndent())
+        assertEquals(results, row)
+    }
 }
