@@ -9,17 +9,17 @@ import com.google.gson.reflect.TypeToken
 val gson: Gson = Gson()
 
 //convert a data class to a map
-fun <T> T.serializeToMap(): Map<String, Any> {
-    return convert()
+fun <T> T.serializeToMap(gson: Gson = Gson()): Map<String, Any> {
+    return convert(gson)
 }
 
 //convert a map to a data class
-inline fun <reified T> Map<String, Any>.toDataClass(): T {
-    return convert()
+inline fun <reified T> Map<String, Any>.toDataClass(gson: Gson = Gson()): T {
+    return convert(gson)
 }
 
 //convert an object of type I to type O
-inline fun <I, reified O> I.convert(): O {
+inline fun <I, reified O> I.convert(gson: Gson): O {
     val json = gson.toJson(this)
     return gson.fromJson(json, object : TypeToken<O>() {}.type)
 }
