@@ -39,15 +39,22 @@ class AppTest {
             .set("b", listOf(1, 2))
         val results = row.toDataClass<Hoge>()
         assertEquals(results, Hoge(2, listOf<Int>(1, 2)))
+
+        assertEquals(
+            results.serializeToMap(),
+            mapOf("a" to 2.0, "b" to listOf(1.0, 2.0))
+        )
     }
 
     @Test
     fun toJson() {
         val row = TableRow()
             .set("a", 2.0)
-        val results = toTableRow("""
+        val results = toTableRow(
+            """
             { "a" : 2 }
-        """.trimIndent())
+        """.trimIndent()
+        )
         assertEquals(results, row)
     }
 }
