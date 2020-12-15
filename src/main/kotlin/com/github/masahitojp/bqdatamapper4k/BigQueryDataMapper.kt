@@ -12,7 +12,7 @@ inline fun <reified T> TableRow.toDataClass(): T {
     return this.toMap().toDataClass<T>()
 }
 
-inline fun toTableRow(json: String): TableRow {
+fun toTableRow(json: String): TableRow {
     val sourceDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
     sourceDateFormat.timeZone = TimeZone.getTimeZone("UTC")
 

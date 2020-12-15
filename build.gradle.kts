@@ -8,7 +8,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.4.21"
-    id("org.jetbrains.dokka") version "0.10.1"
+    id("org.jetbrains.dokka") version "1.4.20"
     `maven-publish`
 }
 
@@ -37,9 +37,8 @@ dependencies {
 }
 
 // Configure existing Dokka task to output HTML to typical Javadoc directory
-val dokka by tasks.getting(DokkaTask::class) {
-    outputFormat = "html"
-    outputDirectory = "$buildDir/javadoc"
+tasks.dokkaHtml.configure {
+    outputDirectory.set(buildDir.resolve("javadoc"))
 }
 
 // Create dokka Jar task from dokka task output
@@ -48,7 +47,7 @@ val dokkaJar by tasks.creating(Jar::class) {
     description = "Assembles Kotlin docs with Dokka"
     archiveClassifier.set("javadoc")
     // dependsOn(dokka) not needed; dependency automatically inferred by from(dokka)
-    from(dokka)
+    from(tasks.dokkaHtml)
 }
 
 // Create sources Jar from main kotlin sources
