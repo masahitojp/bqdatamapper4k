@@ -4,10 +4,8 @@
 package com.github.masahitojp.bqdatamapper4k
 
 import com.google.api.services.bigquery.model.TableRow
-import javax.swing.text.TableView
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
 
 class AppTest {
     @Test
