@@ -3,7 +3,6 @@
  *
  * This generated file contains a sample Kotlin application project to get you started.
  */
-import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
