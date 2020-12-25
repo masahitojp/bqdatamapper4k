@@ -5,11 +5,12 @@ package com.github.masahitojp.bqdatamapper4k
 
 import com.google.api.services.bigquery.model.TableRow
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.TimeZone
+import java.util.Date
 
 
 inline fun <reified T> TableRow.toDataClass(): T {
-    return this.toMap().toDataClass<T>()
+    return this.toMap().toDataClass()
 }
 
 fun toTableRow(json: String): TableRow {
