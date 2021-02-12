@@ -6,24 +6,26 @@
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.4.21"
+    val kotlinVersion = "1.4.30"
+    kotlin("jvm") version kotlinVersion
     id("org.jetbrains.dokka") version "1.4.20"
     `maven-publish`
+    signing
 }
 
 group = "com.github.masahitojp"
-version = "0.0.1"
+version = "0.0.2"
 val artifactID = "bqdatamapper4k"
 
 repositories {
-    // Use jcenter for resolving dependencies.
-    // You can declare any Maven/Ivy/file repository here.
+    mavenCentral()
+    jcenter() // dokka dependency
 }
 
 dependencies {
 
     // Use the Kotlin JDK 8 standard library.
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.21")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.google.cloud:google-cloud-bigquery:1.126.3")
     implementation("com.google.code.gson:gson:2.8.6")
 
@@ -61,6 +63,19 @@ artifacts {
     add("archives", dokkaJar)
 }
 
+val jar by tasks.getting(Jar::class) {
+    manifest {
+        attributes["Implementation-Title"] = name
+        attributes["Implementation-Version"] = version
+        attributes["Implementation-Vendor"] = "com.github.masahitojp"
+        attributes["Built-JDK"] = "${System.getProperty("java.version")} (${System.getProperty("java.specification.vendor")})"
+        attributes["Built-Gradle"] =  gradle.gradleVersion
+    }
+}
+
+val sonatypeUsername = project.findProperty("sonatypeUsername")?.toString() ?: ""
+val sonatypePassword = project.findProperty("sonatypePassword")?.toString() ?: ""
+
 publishing {
     publications {
         create<MavenPublication>("maven") {
@@ -95,15 +110,18 @@ publishing {
     }
     repositories {
         maven {
-            name = "bintray"
-            val bintrayUsername = "masahitojp"
-            val bintrayRepoName = "maven"
-            val bintrayPackageName = "com.github.masahitojp.bqdatamapper4k"
-            setUrl("https://api.bintray.com/content/$bintrayUsername/$bintrayRepoName/$bintrayPackageName/${project.version};publish=0;override=1")
+            name = "MavenCentral"
+            val releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            val snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
             credentials {
-                username = project.findProperty("bintray_user") as String?
-                password = project.findProperty("bintray_api_key") as String?
+                username = sonatypeUsername
+                password = sonatypePassword
             }
         }
     }
+}
+
+signing {
+    sign(publishing.publications["maven"])
 }
