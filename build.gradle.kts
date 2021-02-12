@@ -65,8 +65,8 @@ artifacts {
 
 val jar by tasks.getting(Jar::class) {
     manifest {
-        attributes["Implementation-Title"] = name
-        attributes["Implementation-Version"] = version
+        attributes["Implementation-Title"] = project.name
+        attributes["Implementation-Version"] = project.version
         attributes["Implementation-Vendor"] = "com.github.masahitojp"
         attributes["Built-JDK"] = "${System.getProperty("java.version")} (${System.getProperty("java.specification.vendor")})"
         attributes["Built-Gradle"] =  gradle.gradleVersion
