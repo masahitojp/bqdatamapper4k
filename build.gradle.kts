@@ -52,7 +52,6 @@ val dokkaJar by tasks.creating(Jar::class) {
 
 // Create sources Jar from main kotlin sources
 val sourcesJar by tasks.creating(Jar::class) {
-    group = JavaBasePlugin.DOCUMENTATION_GROUP
     description = "Assembles sources JAR"
     archiveClassifier.set("sources")
     from(sourceSets["main"].allSource)
@@ -65,11 +64,13 @@ artifacts {
 
 val jar by tasks.getting(Jar::class) {
     manifest {
-        attributes["Implementation-Title"] = project.name
-        attributes["Implementation-Version"] = project.version
-        attributes["Implementation-Vendor"] = "com.github.masahitojp"
-        attributes["Built-JDK"] = "${System.getProperty("java.version")} (${System.getProperty("java.specification.vendor")})"
-        attributes["Built-Gradle"] =  gradle.gradleVersion
+        attributes(
+            "Implementation-Title" to project.name,
+            "Implementation-Version" to project.version,
+            "Implementation-Vendor" to "masahito.me",
+            "Built-JDK" to "${System.getProperty("java.version")} (${System.getProperty("java.specification.vendor")})",
+            "Built-Gradle" to gradle.gradleVersion
+        )
     }
 }
 
@@ -79,13 +80,13 @@ val sonatypePassword = project.findProperty("sonatypePassword")?.toString() ?: "
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = "com.github.masahitojp"
+            groupId = project.group.toString()
             from(components.findByName("kotlin"))
             artifact(sourcesJar)
             artifact(dokkaJar)
             pom {
-                name.set("bqdatamapper4k")
-                description.set("BigQuery datamapper in Kotlin")
+                name.set(artifactId)
+                description.set("BigQuery datamapper for Kotlin")
                 url.set("https://github.com/masahitojp/bqdatamapper4k")
                 licenses {
                     license {
@@ -95,7 +96,7 @@ publishing {
                 }
                 developers {
                     developer {
-                        id.set("masahitojp")
+                        id.set("masahito")
                         name.set("Masato Nakamura")
                         email.set("randomstep@gmail.com")
                     }
