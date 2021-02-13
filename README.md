@@ -1,7 +1,7 @@
 # bqdatamapper4k
 It's a glue code in BigQuery for Kotlin users.
 
- <a href='https://bintray.com/masahitojp/maven/com.github.masahitojp.bqdatamapper4k/0.0.1/link'><img src='https://api.bintray.com/packages/masahitojp/maven/com.github.masahitojp.bqdatamapper4k/images/download.svg?version=0.0.1'></a>
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.masahitojp/bqdatamapper4k/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.github.masahitojp/bqdatamapper4k/badge.svg)
 
 ## Getting Started
 
@@ -13,8 +13,11 @@ Install OpenJDK v8 later
 
 for gradle users
 ```
+repositories {
+    mavenCentral()
+}
 dependencies {
-    implementation( "com.github.masahitojp:bqdatamapper4k:0.0.1")
+    implementation( "com.github.masahitojp:bqdatamapper4k:0.1.0")
 }
 ```
 

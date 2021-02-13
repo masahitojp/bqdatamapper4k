@@ -14,7 +14,7 @@ plugins {
 }
 
 group = "com.github.masahitojp"
-version = "0.0.2"
+version = "0.1.0"
 val artifactID = "bqdatamapper4k"
 
 repositories {
