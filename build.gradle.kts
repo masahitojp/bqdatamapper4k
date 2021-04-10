@@ -3,6 +3,7 @@
  *
  * This generated file contains a sample Kotlin application project to get you started.
  */
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
@@ -16,6 +17,9 @@ plugins {
 group = "com.github.masahitojp"
 version = "0.1.0"
 val artifactID = "bqdatamapper4k"
+
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions.useIR = true
 
 repositories {
     mavenCentral()
