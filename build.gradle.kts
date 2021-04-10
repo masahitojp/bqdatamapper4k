@@ -23,6 +23,7 @@ compileKotlin.kotlinOptions.useIR = true
 
 repositories {
     mavenCentral()
+    jcenter() // dokka dependency
 }
 
 dependencies {
