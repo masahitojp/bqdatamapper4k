@@ -9,10 +9,23 @@ import java.util.TimeZone
 import java.util.Date
 
 
+/**
+ * convert BigQuery TableRow to Data classes
+ *
+ * @author mashitojp<randomstep@gmail.com>
+ * @since 0.1.0
+ */
 inline fun <reified T> TableRow.toDataClass(): T {
     return this.toMap().toDataClass()
 }
 
+/**
+ * convert JSON to BigQuery TableRow
+ *
+ * @author mashitojp<randomstep@gmail.com>
+ * @since 0.1.0
+ * @param json JSON String
+ */
 fun toTableRow(json: String): TableRow {
     val sourceDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
     sourceDateFormat.timeZone = TimeZone.getTimeZone("UTC")

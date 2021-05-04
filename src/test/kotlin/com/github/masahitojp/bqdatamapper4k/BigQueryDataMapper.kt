@@ -45,7 +45,7 @@ class AppTest {
     }
 
     @Test
-    fun toJson() {
+    fun testJsonToBigQueryTableRow() {
         val row = TableRow()
             .set("a", 2.0)
         val results = toTableRow(
