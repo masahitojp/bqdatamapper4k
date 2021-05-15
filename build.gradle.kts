@@ -23,6 +23,7 @@ compileKotlin.kotlinOptions.jvmTarget = "1.8"
 
 repositories {
     mavenCentral()
+    maven (url ="https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
 }
 
 dependencies {
