@@ -26,11 +26,11 @@ inline fun <reified T> TableRow.toDataClass(): T {
  * @since 0.1.0
  * @param json JSON String
  */
-fun toTableRow(json: String): TableRow {
+fun String.toTableRow(): TableRow {
     val sourceDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
     sourceDateFormat.timeZone = TimeZone.getTimeZone("UTC")
 
-    val outputRow = gson.fromJson(json, TableRow::class.java)
+    val outputRow = gson.fromJson(this, TableRow::class.java)
     if (outputRow.containsKey("timestamp")) {
         outputRow["timestamp"] = sourceDateFormat.format(Date())
     }

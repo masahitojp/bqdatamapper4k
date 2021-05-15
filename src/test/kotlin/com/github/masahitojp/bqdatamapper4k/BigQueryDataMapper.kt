@@ -4,6 +4,8 @@
 package com.github.masahitojp.bqdatamapper4k
 
 import com.google.api.services.bigquery.model.TableRow
+import com.google.gson.JsonSyntaxException
+import org.junit.Assert.assertThrows
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -48,11 +50,18 @@ class AppTest {
     fun testJsonToBigQueryTableRow() {
         val row = TableRow()
             .set("a", 2.0)
-        val results = toTableRow(
+        val results =
             """
             { "a" : 2 }
         """.trimIndent()
-        )
+                .toTableRow()
         assertEquals(results, row)
+    }
+
+    @Test
+    fun testJsonToBigQueryTableRowForException() {
+        assertThrows(JsonSyntaxException::class.java) {
+            "test".toTableRow()
+        }
     }
 }
