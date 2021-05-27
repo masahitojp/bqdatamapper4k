@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
-    val kotlinVersion = "1.5.0"
+    val kotlinVersion = "1.5.10"
     kotlin("jvm") version kotlinVersion
     id("org.jetbrains.dokka") version "1.4.30"
     `maven-publish`
