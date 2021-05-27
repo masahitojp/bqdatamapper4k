@@ -30,7 +30,7 @@ dependencies {
 
     // Use the Kotlin JDK 8 standard library.
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("com.google.cloud:google-cloud-bigquery:1.126.3")
+    implementation("com.google.cloud:google-cloud-bigquery:1.131.1")
     implementation("com.google.code.gson:gson:2.8.7")
 
     // Use the Kotlin test library.
