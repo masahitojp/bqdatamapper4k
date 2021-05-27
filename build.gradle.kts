@@ -15,7 +15,7 @@ plugins {
 }
 
 group = "com.github.masahitojp"
-version = "0.1.0"
+version = "0.2.0"
 val artifactID = "bqdatamapper4k"
 
 val compileKotlin: KotlinCompile by tasks
