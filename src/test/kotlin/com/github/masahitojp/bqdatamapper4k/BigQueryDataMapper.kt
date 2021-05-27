@@ -6,6 +6,8 @@ package com.github.masahitojp.bqdatamapper4k
 import com.google.api.services.bigquery.model.TableRow
 import com.google.gson.JsonSyntaxException
 import org.junit.Assert.assertThrows
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -55,6 +57,20 @@ class AppTest {
             { "a" : 2 }
         """.trimIndent()
                 .toTableRow()
+        assertEquals(results, row)
+    }
+
+    @Test
+    fun testJsonToBigQueryTableRowForTimestamp() {
+        val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd/ HH:mm:ss")
+        val now = LocalDateTime.now()
+        val row = TableRow()
+            .set("timestamp", dateTimeFormatter.format(now))
+        val results =
+            """
+            { "timestamp" : "" }
+        """.trimIndent()
+                .toTableRow(now)
         assertEquals(results, row)
     }
 
