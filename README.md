@@ -1,7 +1,7 @@
 # bqdatamapper4k
 It's a glue code in BigQuery for Kotlin users.
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.masahitojp/bqdatamapper4k/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.github.masahitojp/bqdatamapper4k/badge.svg)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.masahitojp/bqdatamapper4k/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.github.masahitojp/bqdatamapper4k/)
 
 ## Getting Started
 
@@ -17,7 +17,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation( "com.github.masahitojp:bqdatamapper4k:0.1.0")
+    implementation( "com.github.masahitojp:bqdatamapper4k:0.2.0")
 }
 ```
 
