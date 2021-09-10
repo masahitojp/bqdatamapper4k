@@ -27,6 +27,13 @@ class AppTest {
     }
 
     @Test
+    fun testPutting_Null_Value_Into_NonNullType() {
+        val row = TableRow().set("a", null)
+        val results = row.toDataClass<Piyo>()
+        assertEquals(results, Piyo(0))
+    }
+
+    @Test
     fun testDataclassWithDefaultValue() {
         val row = TableRow().set("a", 2)
         val results = row.toDataClass<Baz>()

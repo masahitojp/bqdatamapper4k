@@ -18,3 +18,6 @@ data class Hoge(
     val a: Int,
     val b: List<Int>,
 )
+data class Piyo(
+    val a: Int
+)
