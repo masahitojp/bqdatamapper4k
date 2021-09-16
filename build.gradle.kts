@@ -7,11 +7,15 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
-    val kotlinVersion = "1.5.10"
+    val kotlinVersion = "1.5.30"
     kotlin("jvm") version kotlinVersion
-    id("org.jetbrains.dokka") version "1.4.32"
+    id("org.jetbrains.dokka") version "1.5.0"
     `maven-publish`
     signing
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 group = "com.github.masahitojp"
@@ -30,8 +34,8 @@ dependencies {
 
     // Use the Kotlin JDK 8 standard library.
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("com.google.cloud:google-cloud-bigquery:1.131.1")
-    implementation("com.google.code.gson:gson:2.8.7")
+    implementation("com.google.cloud:google-cloud-bigquery:2.1.6")
+    implementation("com.google.code.gson:gson:2.8.8")
 
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
