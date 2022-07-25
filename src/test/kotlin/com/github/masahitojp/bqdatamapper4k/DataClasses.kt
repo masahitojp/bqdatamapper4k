@@ -21,3 +21,7 @@ data class Hoge(
 data class Piyo(
     val a: Int
 )
+
+data class ListStringTest (
+    val a: List<String>
+    )

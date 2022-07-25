@@ -87,4 +87,10 @@ class AppTest {
             "test".toTableRow()
         }
     }
+    @Test
+    fun testAAAA () {
+        val row: TableRow = TableRow().set("a", listOf("c", "b", "a"))
+        val results: ListStringTest = row.toDataClass<ListStringTest>()
+        assertEquals(results, ListStringTest(listOf("c", "b", "a")))
+    }
 }
