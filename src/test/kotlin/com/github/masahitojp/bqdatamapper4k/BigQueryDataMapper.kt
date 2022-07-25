@@ -82,6 +82,17 @@ class AppTest {
     }
 
     @Test
+    fun testJsonToBigQueryTableRowForStringList() {
+        val row = TableRow()
+            .set("a", arrayListOf("佐藤", "鈴木", "井上"))
+        val results =
+            """
+            { "a" : ["佐藤", "鈴木", "井上"] }
+        """.trimIndent()
+                .toTableRow()
+        assertEquals(results, row)
+    }
+    @Test
     fun testJsonToBigQueryTableRowForException() {
         assertThrows(JsonSyntaxException::class.java) {
             "test".toTableRow()
@@ -89,8 +100,8 @@ class AppTest {
     }
     @Test
     fun testAAAA () {
-        val row: TableRow = TableRow().set("a", listOf("c", "b", "a"))
+        val row: TableRow = TableRow().set("a", listOf("佐藤", "鈴木", "井上"))
         val results: ListStringTest = row.toDataClass<ListStringTest>()
-        assertEquals(results, ListStringTest(listOf("c", "b", "a")))
+        assertEquals(results, ListStringTest(listOf("佐藤", "鈴木", "井上")))
     }
 }
